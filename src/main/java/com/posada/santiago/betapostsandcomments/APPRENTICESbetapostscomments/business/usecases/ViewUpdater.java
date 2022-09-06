@@ -30,7 +30,7 @@ public class ViewUpdater extends DomainUpdater {
                             event.getContent()
                           //  ,event.getFont()
                     );
-            repository.addCommentToPost(comment);
+            repository.addCommentToPost(comment).subscribe();
         });
     }
 }
