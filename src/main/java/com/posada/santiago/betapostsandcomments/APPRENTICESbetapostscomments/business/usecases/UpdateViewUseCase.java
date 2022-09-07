@@ -19,7 +19,15 @@ public class UpdateViewUseCase implements Consumer<DomainEvent>{
 
     @Override
     public void accept(DomainEvent domainEvent){
-        //bus.publish(domainEvent);
+
+       // bus.publish(domainEvent);
+      /*  if (domainEvent.type.contains("postcreated")){
+            bus.publish(domainEvent.);
+        }
+        if (domainEvent.type.contains("commentadded")){
+            bus.publishcomment(domainEvent);
+        }*/
+
         updater.applyEvent(domainEvent);
     }
 

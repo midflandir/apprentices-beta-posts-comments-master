@@ -28,7 +28,6 @@ try{
     String type = notification.getType().replace("alphapostsandcomments","betapostsandcomments.APPRENTICESbetapostscomments");
 
     DomainEvent event = (DomainEvent) gson.fromJson((notification).getBody(), Class.forName(type));
-
     useCase.accept(event);
 }catch (ClassCastException var6){
 
@@ -36,8 +35,6 @@ try{
 } catch (ClassNotFoundException e) {
     throw new RuntimeException(e);
 }
-
-
         //Finish the implementation of this Method
     }
 }
