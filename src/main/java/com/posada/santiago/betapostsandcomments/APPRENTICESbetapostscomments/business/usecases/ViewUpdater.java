@@ -8,8 +8,9 @@ import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.bus
 import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.business.generic.DomainUpdater;
 import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.domain.events.CommentAdded;
 import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.domain.events.PostCreated;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 public class ViewUpdater extends DomainUpdater {
     private final DomainViewRepository repository;
@@ -20,9 +21,8 @@ public class ViewUpdater extends DomainUpdater {
 
         listen((PostCreated event)-> {
             PostViewModel post =
-                    new PostViewModel(event.aggregateRootId(), event.getAuthor(), event.getTitle(), null);
-            repository.saveNewPost(post).subscribe();
-
+                new PostViewModel(event.aggregateRootId(), event.getAuthor(), event.getTitle(), null);
+                repository.saveNewPost(post).subscribe();
                 this.bus.publishPost(post);
 
         });

@@ -3,10 +3,11 @@ package com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.bu
 
 import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.business.gateways.DomainViewRepository;
 import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.business.gateways.model.PostViewModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
+@Slf4j
 @Service
 public class BringPostById {
     // finish the implementation of this class using the functional interfaces
@@ -17,6 +18,6 @@ public class BringPostById {
     }
 
     public Mono<PostViewModel> bringPostById(String id){
-        return repository.findByAggregateId(id);
+        return repository.findByAggregateId(id).doOnError(error -> log.error("Error - Posts couldn't be loaded." + error));
     }
 }

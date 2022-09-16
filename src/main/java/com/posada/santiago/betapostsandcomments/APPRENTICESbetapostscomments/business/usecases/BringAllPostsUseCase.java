@@ -3,9 +3,10 @@ package com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.bu
 
 import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.business.gateways.DomainViewRepository;
 import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.business.gateways.model.PostViewModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-
+@Slf4j
 @Service
 public class BringAllPostsUseCase {
 
@@ -16,7 +17,7 @@ public class BringAllPostsUseCase {
     }
 
     public Flux<PostViewModel> BringAllPosts(){
-        return repository.findAllPosts();
+        return repository.findAllPosts().doOnError(error -> log.error("Error - Posts couldn't be loaded." + error));
     }
 
     //Finish the implementation of this class using the functional interfaces
