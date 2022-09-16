@@ -46,7 +46,9 @@ public class MongoViewRepository implements DomainViewRepository {
     public Mono<PostViewModel> saveNewPost(PostViewModel post) {
 
         /** make the implementation, using the template, to save a post*/
-        return template.save(post);
+        return template.save(post).doFinally(attheend ->
+                log.info("Congratulations post was saved.")
+        ).doOnError(error -> log.error("Error - Posts couldn't be save." + error));
     }
 
     @Override
